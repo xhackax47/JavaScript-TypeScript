@@ -1,3 +1,5 @@
+import { Promise } from 'es6-promise';
+
 console.log('--------------------------- TP TYPESCRIPT ----------------------------');
 let noteTab20: Array<number> = [8, 5, 7];
 let noteTab10: Array<number> = noteTab20.map((elmt) => elmt / 2);
@@ -163,7 +165,7 @@ let x: number = ((a, b) => a + b)(20, 25);
 
 function userIdEmployee() {
     console.log("Let's get started!");
-    var myEmployee = new Employee(this.userId = '47');
+    var myEmployee = new Employee('47');
     myEmployee.displayUserId();
 }
 
@@ -350,8 +352,39 @@ console.log("Afficher index 7,8 et 9 de listPersonsWorking : ");
 let listPersons789 = listPersonsWorking.filter((elmt: Personne, index: number) => { return index >= 7 && index < 10 });
 console.log(listPersons789);
 console.log("Afficher seulement Dupont dans listPersonsWorking : ");
-let listDupont = listPersonsWorking.filter((elmt: Personne) => {return elmt.nom === 'DUPONT'});
+let listDupont = listPersonsWorking.filter((elmt: Personne) => { return elmt.nom === 'DUPONT' });
 console.log(listDupont);
 console.log("Afficher personnes commencant par D dans listPersonsWorking : ");
-let listPersonsStartsWithD = listPersonsWorking.some((elmt: Personne) => {return elmt.nom.slice(0,1) === 'D'});
+let listPersonsStartsWithD = listPersonsWorking.some((elmt: Personne) => { return elmt.nom.slice(0, 1) === 'D' });
 console.log("Présence de personnes avec un nom commencant par D : " + listPersonsStartsWithD);
+console.log('-------------------------------------------------------');
+console.log("Affichage testNum avec Promise : ")
+let testNum = (n: number) => {
+    return new Promise(function (resolve, reject) {
+        if (n > 10) {
+            resolve("CHIFFRE AU DESSUS DE 10");
+        } else {
+            reject("ERREUR")
+        }
+    });
+}
+testNum(11).then(value => console.log(value)).catch(err => console.log("Error"));
+
+let listString: Array<string> = ['Test1', 'Test2', 'Test3'];
+
+let triStringArray = (listString: Array<string>) => {
+    return new Promise(function (resolve, reject) {
+        if (listString.some((val: string) => {
+            return !isNaN(Number(val));
+        }))
+            reject('Il y a un nombre');
+
+        else {
+            listString.sort().forEach((listString) => console.log(listString.toUpperCase()));
+        }
+        resolve('OK');
+    });
+}
+triStringArray(listString).
+then((value: string) => { console.log(value); }).
+catch((value: string) => { console.log(value); });

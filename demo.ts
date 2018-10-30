@@ -112,6 +112,30 @@ class Carre extends Rectangle{
 
 let [d,g, ...autres] = [0,9];
 
+// PROMISE
+
+function hello(onBefore, onAfter){
+    if(onBefore){
+        onBefore();
+    }
+    console.log('Hello');
+    if(onAfter){
+        onAfter();
+    }
+}
+
+function doAsyncTask(cb) {
+    setTimeout(() => {
+        console.log('Async Task Calling Callback');
+        cb();
+    }, 1000);
+}
+
+let prom = new Promise(function(resolve,reject){
+    resolve('BRAVO');
+    reject('ECHEC')
+});
+
 // CONSOLE.LOG
 
 console.log('Mon entier : ' + e);
@@ -134,3 +158,7 @@ console.log('Index Enum C : ' + enumC);
 console.log('Methode affiche sur person1 : ' + person1.affiche());
 console.log('Methode affiche sur obj1 : ' + obj1.affiche());
 console.log('Déclarations variables à la volée : d = ' + d + ' et g = ' + g + ' et autres = ' + autres);
+hello(() => console.log('AVANT'), () => console.log('APRES')); 
+doAsyncTask(() => console.log("Callback Called"));
+console.log('Test');
+prom.then((value) => console.log(value)).catch((err) => console.log(err));

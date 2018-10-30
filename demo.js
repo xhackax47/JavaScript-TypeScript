@@ -13,6 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
+var es6_promise_1 = require("es6-promise");
 console.log('DEMONSTRATION UTILISATION TYPESCRIPT');
 console.log('------------------------------------------------');
 // VARIABLES
@@ -107,6 +108,26 @@ var Carre = /** @class */ (function (_super) {
     return Carre;
 }(Rectangle));
 var _a = [0, 9], d = _a[0], g = _a[1], autres = _a.slice(2);
+// PROMISE
+function hello(onBefore, onAfter) {
+    if (onBefore) {
+        onBefore();
+    }
+    console.log('Hello');
+    if (onAfter) {
+        onAfter();
+    }
+}
+function doAsyncTask(cb) {
+    setTimeout(function () {
+        console.log('Async Task Calling Callback');
+        cb();
+    }, 1000);
+}
+var prom = new es6_promise_1.Promise(function (resolve, reject) {
+    resolve('BRAVO');
+    reject('ECHEC');
+});
 // CONSOLE.LOG
 console.log('Mon entier : ' + e);
 console.log('Mon réel : ' + r);
@@ -128,3 +149,7 @@ console.log('Index Enum C : ' + enumC);
 console.log('Methode affiche sur person1 : ' + person1.affiche());
 console.log('Methode affiche sur obj1 : ' + obj1.affiche());
 console.log('Déclarations variables à la volée : d = ' + d + ' et g = ' + g + ' et autres = ' + autres);
+hello(function () { return console.log('AVANT'); }, function () { return console.log('APRES'); });
+doAsyncTask(function () { return console.log("Callback Called"); });
+console.log('Test');
+prom.then(function (value) { return console.log(value); })["catch"](function (err) { return console.log(err); });

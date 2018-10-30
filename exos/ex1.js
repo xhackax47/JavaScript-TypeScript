@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -11,6 +12,8 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+exports.__esModule = true;
+var es6_promise_1 = require("es6-promise");
 console.log('--------------------------- TP TYPESCRIPT ----------------------------');
 var noteTab20 = [8, 5, 7];
 var noteTab10 = noteTab20.map(function (elmt) { return elmt / 2; });
@@ -131,7 +134,7 @@ var y = (function (a, b) { return a + b; })(20, 25);
 var x = (function (a, b) { return a + b; })(20, 25);
 function userIdEmployee() {
     console.log("Let's get started!");
-    var myEmployee = new Employee(this.userId = '47');
+    var myEmployee = new Employee('47');
     myEmployee.displayUserId();
 }
 function callCallBack(name) {
@@ -330,3 +333,31 @@ console.log(listDupont);
 console.log("Afficher personnes commencant par D dans listPersonsWorking : ");
 var listPersonsStartsWithD = listPersonsWorking.some(function (elmt) { return elmt.nom.slice(0, 1) === 'D'; });
 console.log("Présence de personnes avec un nom commencant par D : " + listPersonsStartsWithD);
+console.log('-------------------------------------------------------');
+console.log("Affichage testNum avec Promise : ");
+var testNum = function (n) {
+    return new es6_promise_1.Promise(function (resolve, reject) {
+        if (n > 10) {
+            resolve("CHIFFRE AU DESSUS DE 10");
+        }
+        else {
+            reject("ERREUR");
+        }
+    });
+};
+testNum(11).then(function (value) { return console.log(value); })["catch"](function (err) { return console.log("Error"); });
+var listString = ['Test1', 'Test2', 'Test3'];
+var triStringArray = function (listString) {
+    return new es6_promise_1.Promise(function (resolve, reject) {
+        if (listString.some(function (val) {
+            return !isNaN(Number(val));
+        }))
+            reject('Il y a un nombre');
+        else {
+            listString.sort().forEach(function (listString) { return console.log(listString.toUpperCase()); });
+        }
+        resolve('OK');
+    });
+};
+triStringArray(listString).
+    then(function (value) { console.log(value); })["catch"](function (value) { console.log(value); });
